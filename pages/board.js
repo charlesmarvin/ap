@@ -1,9 +1,12 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import fetch from 'isomorphic-unfetch'
 import Votes from '../components/board/Votes'
 import Cards from '../components/board/Cards'
+import Share from '../components/board/Share'
+import TitleBar from '../components/board/TitleBar'
 
-export default class Board extends React.Component {
+class Board extends React.Component {
   static async getInitialProps (context) {
     const { id } = context.query
     const res = await fetch(`http://localhost:3000/api/boards/${id}`)
@@ -88,10 +91,12 @@ export default class Board extends React.Component {
       }
     }))
   }
+
   _updateVotes (members) {
     const votes = []
     for (let id in members) {
-      votes.push(members[id])
+      const vote = Object.assign({userId: id}, members[id])
+      votes.push(vote)
     }
     this.setState({votes})
   }
@@ -101,15 +106,26 @@ export default class Board extends React.Component {
   }
 
   render () {
-    console.log(this.state)
     if (!this.props.board) {
       return (<div>Board not found</div>)
     }
+    const shareLink = (
+      <Share
+        boardId={this.props.board.id}
+      />
+    )
+    const title = (
+      <TitleBar
+        title={this.props.board.boardName}
+        link={shareLink}
+      />
+    )
     return (
       <div>
+
         <Cards
           selection={this.state.selectedCard}
-          title={this.props.board.boardName}
+          title={title}
           type={this.props.board.boardType}
           onSelect={this.handleSelectionUpdate}
         />
@@ -123,3 +139,12 @@ export default class Board extends React.Component {
     )
   }
 }
+
+Board.propTypes = {
+  board: PropTypes.shape({
+    boardName: PropTypes.string.isRequired,
+    boardType: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
+  })
+}
+export default Board

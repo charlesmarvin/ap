@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 class Card extends PureComponent {
@@ -24,6 +25,12 @@ class Card extends PureComponent {
       </div>
     )
   }
+}
+
+Card.propTypes = {
+  label: PropTypes.node.isRequired,
+  onSelect: PropTypes.func,
+  selected: PropTypes.bool
 }
 
 export default Card

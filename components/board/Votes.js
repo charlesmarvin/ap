@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import Vote from './Vote'
 
 class Votes extends PureComponent {
@@ -44,6 +45,15 @@ class Votes extends PureComponent {
       </div>
     )
   }
+}
+
+Votes.propTypes = {
+  revealed: PropTypes.bool,
+  votes: PropTypes.arrayOf(PropTypes.shape({
+    userId: PropTypes.string,
+    voted: PropTypes.bool,
+    vote: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  }))
 }
 
 export default Votes

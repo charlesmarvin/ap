@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 import Card from './Card'
 
 const CARDS_BY_BOARD_TYPES = {
@@ -34,18 +35,31 @@ class Cards extends PureComponent {
   render () {
     return (
       <div className='row cards'>
-        <h4>{this.props.title} <a title='Create New Board'>{'\u27A4'}</a></h4>
         <div className='column'>
+          {this.props.title}
+        </div>
+        <div className='column u-max-full-width'>
           {this._renderCards()}
         </div>
         <style jsx>{`
           .cards {
-            margin-top: 4em
+            
           }
         `}</style>
       </div>
     )
   }
+}
+
+Cards.propTypes = {
+  selection: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number
+  ]),
+  title: PropTypes.oneOfType([
+    PropTypes.node
+  ]),
+  type: PropTypes.oneOf(['standard', 'fibonacci', 'tshirt']).isRequired
 }
 
 export default Cards

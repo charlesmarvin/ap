@@ -1,7 +1,5 @@
 import App, {Container} from 'next/app'
 import Link from 'next/link'
-import Header from '../components/Header'
-
 import '../styles/lib/normalize.css'
 import '../styles/lib/skeleton.css'
 
@@ -28,7 +26,7 @@ export default class ApApp extends App {
 
         <div className='row'>
           <div className='column' style={{marginRight: 1 + 'em'}}>
-            <h1>a p | <Link href='/newboard'><a style={linkStyle}>{'\u002B'}</a></Link></h1>
+            <h1>a p | <Link href='/newboard'><a style={linkStyle} title='Create New Board'>{'\u002B'}</a></Link></h1>
           </div>
           <div className='column'>
             <app-alerts />

@@ -1,4 +1,5 @@
 import React, {PureComponent} from 'react'
+import PropTypes from 'prop-types'
 
 class Vote extends PureComponent {
   render () {
@@ -19,6 +20,10 @@ class Vote extends PureComponent {
       </div>
     )
   }
+}
+
+Vote.propTypes = {
+  label: PropTypes.node.isRequired
 }
 
 export default Vote
