@@ -1,2 +1,17 @@
-const withCSS = require('@zeit/next-css')
-module.exports = withCSS()
+const { PHASE_PRODUCTION_SERVER } =
+  process.env.NODE_ENV === 'development'
+    ? {}
+    : process.env.NOW
+      ? require('next-server/constants')
+      : require('next/constants')
+
+module.exports = (phase, { defaultConfig }) => {
+  if (phase === PHASE_PRODUCTION_SERVER) {
+    // Config used to run in production.
+    return {}
+  }
+
+  const withCSS = require('@zeit/next-css')
+
+  return withCSS()
+}
