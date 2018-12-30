@@ -1,18 +1,22 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
+import PropTypes from 'prop-types'
 
-class Share extends Component {
+class Share extends PureComponent {
   constructor (props) {
     super(props)
     this.handleShare = this.handleShare.bind(this)
   }
 
   handleShare (event) {
-    event.preventDefault()
     console.log('share clicked')
+    event.preventDefault()
+    if (this.props.id) {
+      console.log(`copied link ${this.props.id} to the clipboard`)
+    }
   }
   render () {
     return (
-      <a title='Share Board' href='#' onClick={this.handleShare}>
+      <a title='Share Board' onClick={this.handleShare}>
         <img
           alt='SHARE'
           width='26'
@@ -21,6 +25,10 @@ class Share extends Component {
       </a>
     )
   }
+}
+
+Share.propTypes = {
+  id: PropTypes.string
 }
 
 export default Share

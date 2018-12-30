@@ -25,7 +25,7 @@ export default class NewBoardForm extends React.Component {
     event.preventDefault()
     if (this.state.boardName && this.state.boardType) {
       try {
-        const res = await fetch(`/api/boards`, {
+        const res = await fetch('/api/boards', {
           method: 'POST',
           body: JSON.stringify(this.state),
           headers: { 'Content-Type': 'application/json' }

@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-class TitleBar extends Component {
+class TitleBar extends PureComponent {
   render () {
     return (
       <div className='row cards'>

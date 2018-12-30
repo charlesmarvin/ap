@@ -7,9 +7,10 @@ import Share from '../components/board/Share'
 import TitleBar from '../components/board/TitleBar'
 
 class Board extends React.Component {
-  static async getInitialProps (context) {
-    const { id } = context.query
-    const res = await fetch(`http://localhost:3000/api/boards/${id}`)
+  static async getInitialProps ({ query, req }) {
+    const protocol = req.headers['x-forwarded-proto'] || 'http'
+    const baseUrl = req ? `${protocol}://${req.headers.host}` : ''
+    const res = await fetch(`${baseUrl}/api/boards/${query.id}`)
     return {
       board: res.ok ? await res.json() : null
     }
